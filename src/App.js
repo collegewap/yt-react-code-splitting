@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Link, Route, Routes } from "react-router-dom";
+import Home from "./Home";
+import loadable from "@loadable/component";
+import Loading from "./Loading";
+
+const CatImage = loadable(() => import("./CatImage.js"), {
+  fallback: <Loading />,
+});
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ul>
+        <li>
+          <Link to="/">Dog Image</Link>
+        </li>
+        <li>
+          <Link to="/cat">Cat Image</Link>
+        </li>
+      </ul>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/cat" element={<CatImage />}></Route>
+      </Routes>
     </div>
   );
 }
